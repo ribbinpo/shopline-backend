@@ -6,7 +6,13 @@ services:
     container_name: mongo-express
     restart: always
     ports:
-      - "27017:27017"
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123
+      MONGO_INITDB_DATABASE: shopline
+    volumes:
+      - ./mongo_scripts/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+      - ./mongo_db:/data/db
+volumes:
+  mongo_db:
