@@ -1,7 +1,7 @@
 import { IsEmail, IsEnum, IsNotEmpty, ValidateIf } from 'class-validator';
 import { Role } from 'src/database/enums/role.enum';
 
-export class CreateUserDto {
+export class SignUpDto {
   @IsNotEmpty()
   name: string;
 
