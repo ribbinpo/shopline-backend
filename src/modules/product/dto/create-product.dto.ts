@@ -1,5 +1,12 @@
 import { Optional } from '@nestjs/common';
-import { IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
+import { Transform } from 'class-transformer';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsUrl,
+  ValidateIf,
+} from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
@@ -7,20 +14,18 @@ export class CreateProductDto {
   name: string;
 
   @IsNumber()
+  @Transform(({ value }) => parseFloat(value))
   price: number;
 
   @Optional()
-  @IsString()
   description?: string;
 
-  @Optional()
+  @ValidateIf((o) => o.imageUrl !== undefined)
   @IsUrl()
   imageUrl?: string;
 
-  @Optional()
+  @ValidateIf((o) => o.quantity !== undefined)
   @IsNumber()
-  @IsString()
+  @Transform(({ value }) => parseInt(value))
   quantity: number;
-
-  // categories: Category[];
 }
