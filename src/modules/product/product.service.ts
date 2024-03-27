@@ -29,7 +29,7 @@ export class ProductService {
     }
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     try {
       return this.productModel.findById(id).exec();
     } catch (e) {
@@ -38,7 +38,7 @@ export class ProductService {
     }
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
+  update(id: string, updateProductDto: UpdateProductDto) {
     try {
       return this.productModel
         .findByIdAndUpdate({ _id: id }, updateProductDto, { upsert: true })
@@ -49,7 +49,7 @@ export class ProductService {
     }
   }
 
-  remove(id: number) {
+  remove(id: string) {
     try {
       return this.productModel.findByIdAndDelete({ _id: id }).exec();
     } catch (e) {

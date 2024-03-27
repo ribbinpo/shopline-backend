@@ -61,7 +61,6 @@ export class ProductController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     try {
-      console.log(file);
       createProductDto.imageUrl = file.path;
       return this.productService.create(createProductDto);
     } catch (error) {
@@ -73,25 +72,25 @@ export class ProductController {
   @HttpCode(HttpStatus.OK)
   @Get()
   findAll() {
-    this.productService.findAll();
+    return this.productService.findAll();
   }
 
   @HttpCode(HttpStatus.OK)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+    return this.productService.findOne(id);
   }
 
   @HttpCode(HttpStatus.OK)
   @Patch(':id')
   update(@Param('id') id: string, updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+    return this.productService.update(id, updateProductDto);
   }
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   remove(@Param('id') id: string) {
-    this.productService.remove(+id);
+    this.productService.remove(id);
   }
 
   @HttpCode(HttpStatus.OK)
